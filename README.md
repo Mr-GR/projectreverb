@@ -1,4 +1,4 @@
-# projectreverb Learning Course Website: React + TypeScript
+# Project Reverb Learning Course Website: React + TypeScript
 
 ## Overview 
 This project is an informational website for an in-person English learning course, built using React and TypeScript. It provides a clean and intuitive interface for potential students to explore course details, schedule, and benefits.
