@@ -3,13 +3,13 @@ const AboutUs = () => {
     <div className="flex flex-1">
       <div className="home-container">
         <div className="home-posts">
-            <h2 className="h3-bold md:h2-bold text-left w-full text-violet-500">
+            <h2 className="h3-bold md:h2-bold mb-3 text-left w-full text-violet-500">
                 About Us 
             </h2>
 
             <p className="text-wrap text-left w-full text-violet-500 mb-3">
-              ReVerb was founded by Albert Fortuna's passion for teaching was the main driver in starting the institute.
-              He enjoys teaching students, and his passion, drive, and motivation have led him to teach more than 5,000 students.....
+              ReVerb was founded by Albert Fortuna. Albert's passion for teaching was the main driver in starting the institute.
+              His passion for teaching, drive, and motivation have led him to teach more than 5,000 students.
             </p>
 
 
