@@ -258,7 +258,11 @@
   
   .navbar-links a:hover {
     @apply text-violet-500; 
-  }  
+  }
+  
+  .navbar-links-info {
+    @apply underline text-violet-500 text-base transition-colors duration-300; 
+  }
 }
 
 @layer components {
