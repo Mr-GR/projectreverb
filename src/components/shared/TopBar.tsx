@@ -8,7 +8,7 @@ const Topbar = () => {
             <h1 className="h3-bold md:h2-bold">ReVerb</h1>
         </Link>
 
-        <ul className="max-sm:hidden navbar-links ">
+        <ul className="max-md:hidden navbar-links ">
           <Link to="/">
             Home
           </Link>
