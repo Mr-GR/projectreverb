@@ -57,7 +57,7 @@ export const theme = {
       'accordion-up': 'accordion-up 0.2s ease-out',
     },
     backgroundImage: {
-      "hero-pattern": "url('/public/assets/images/herobg.png')",
+      "hero-pattern": "url('/public/assets/images/purplebackground1.png')",
     },
   },
 };
