@@ -13,15 +13,14 @@ import {
     AccordionTrigger,
   } from "@/components/ui/accordion"
   
-
 const Home = () => {
 
   return (
     <div className="flex flex-1">
       <div className="home-container">
         <div className="home-posts">
-            <h2 className="h3-bold md:h2-bold text-left w-full">
-                Home
+            <h2 className="h3-bold md:h2-bold text-left w-full text-violet-500">
+                Hola Bienvenidos
             </h2>
 
             <Carousel>
@@ -51,20 +50,20 @@ const Home = () => {
                 <CarouselNext />
             </Carousel>
 
-            <h2 className="h3-bold md:h2-bold text-left w-full">
+            <h2 className="h3-bold md:h2-bold text-left w-full text-violet-500">
                 Frequently Asked Questions
             </h2>
 
             <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-                <AccordionTrigger>Class Time and Dates?</AccordionTrigger>
-                <AccordionContent>
+                <AccordionTrigger className="text-violet-500">Class Time and Dates?</AccordionTrigger>
+                <AccordionContent className="text-violet-500">
                     Our schedule is evenings from 6 pm-8 pm Monday, Wednesday, and Friday.
                 </AccordionContent>
-            </AccordionItem>
+            </AccordionItem  >
             <AccordionItem value="item-2">
-                <AccordionTrigger>Where are we located</AccordionTrigger>
-                <AccordionContent>
+                <AccordionTrigger className="text-violet-500" >Where are we located</AccordionTrigger>
+                <AccordionContent className="text-violet-500">
                     We are located in Norcross, Georgia.
                 </AccordionContent>
             </AccordionItem>

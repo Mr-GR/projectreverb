@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
 
 const Topbar = () => {
   return (
@@ -9,12 +8,23 @@ const Topbar = () => {
             <h1 className="h3-bold md:h2-bold">ReVerb</h1>
         </Link>
 
-        <div className="flex gap-4">
-          <Button
-            variant="ghost"
-            className="shad-button_ghost">
-          </Button>
-        </div>
+        <ul className="max-sm:hidden navbar-links ">
+          <Link to="/">
+            Home
+          </Link>
+
+          <Link to="/information">
+            Info
+          </Link>
+
+          <Link to="/about">
+            About
+          </Link>
+
+          <Link to="/contact">
+            Contact
+          </Link>
+        </ul>
       </div>
     </section>
   );
