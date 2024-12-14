@@ -23,22 +23,22 @@ export const sidebarLinks = [
   
   export const bottombarLinks = [
     {
-      imgURL: "/assets/icons/home.svg",
+      imgURL: "/assets/icons/homeblue.svg",
       route: "/",
       label: "Home",
     },
     {
-      imgURL: "/assets/icons/wallpaper.svg",
+      imgURL: "/assets/icons/infoblue.svg",
       route: "/information",
       label: "Info",
     },
     {
-      imgURL: "/assets/icons/bookmark.svg",
+      imgURL: "/assets/icons/aboutusblue.svg",
       route: "/about",
       label: "About Us",
     },
     {
-      imgURL: "/assets/icons/gallery-add.svg",
+      imgURL: "/assets/icons/emailblue.svg",
       route: "/contact",
       label: "Contact Us",
     },
