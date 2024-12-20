@@ -1,114 +1,96 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { z } from "zod"
+import { FormEvent } from "react";
+import Swal from 'sweetalert2'
+import { formConfig } from "@/lib/form/config";
 
-const formSchema = z.object({
-  name: z.string().max(280, { message: "Please check name length"}),
-  email: z.string().email({ message: "Invalid email address."}),
-  phone: z.string().min(5, { message: "Phone number must be at least 5 characters." }).max(20, { message: "Phone number is too long." }).optional(),
-  message: z.string().max(280, {message: "You have reached the max character limit"})
-})
+function ContactUs() {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(event.currentTarget);
+    const access = formConfig.formContact
+    formData.append("access_key", String(access));
 
-type FormSchemaType = z.infer<typeof formSchema>
+    const object: Record<string, string> = Object.fromEntries(formData) as Record<string, string>;
+    const json = JSON.stringify(object);
 
-const ContactUs: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormSchemaType>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
-  })
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json
+      });
+      const data = await res.json();
 
-  // Form submission handler
-  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
-    console.log("Form Submitted:", data)
-    //Contact Logic
-  }
+      if (data.success) {
+        console.log("Success", data);
+        Swal.fire({
+          title: "Thank You!",
+          text: "You'll here from us within 24-48hrs",
+          icon: "success"
+        });
+        form.reset();
+      } else {
+        console.error("Error", data);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    } catch (error) {
+      console.error("Network Error", error);
+    }
+  };
 
   return (
     <div className="flex flex-1 justify-center">
       <div className="home-container max-w-md w-full rounded-md">
-        <h2 className="h3-bold md:h2-bold text-left w-full text-violet-500">
-          Contact Us
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              {...register("name")}
-              className={`block w-full mt-1 p-2 border rounded-md ${
-                errors.name ? "border-red-500" : "border-gray-300"
-              } text-gray-900`}
-            />
-            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-          </div>
+      <h2 className="h3-bold md:h2-bold text-left w-full text-violet-500">
+        Contact Us
+      </h2>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Name
+          </label>
+          <input 
+            type="text" 
+            name="name" required  
+            className={`block w-full mt-1 p-2 border rounded-md "border-gray-300"
+          text-gray-900`} />
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              {...register("email")}
-              className={`block w-full mt-1 p-2 border rounded-md ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              } text-gray-900`}
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-          </div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input 
+            type="email" 
+            name="email" required
+            className={`block w-full mt-1 p-2 border rounded-md "border-gray-300"
+              text-gray-900`} />
 
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-              Phone (Optional)
-            </label>
-            <input
-              id="phone"
-              type="text"
-              {...register("phone")}
-              className={`block w-full mt-1 p-2 border rounded-md ${
-                errors.phone ? "border-red-500" : "border-gray-300"
-              } text-gray-900`}
-            />
-            {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-              Message
-            </label>
-            <textarea
-              id="message"
-              {...register("message")}
-              className={`block w-full mt-1 p-2 border rounded-md ${
-                errors.message ? "border-red-500" : "border-gray-300"
-              } text-gray-900`}
-              rows={4}
-            />
-            {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
-          </div>
-
-          <button
-            type="submit"
-            className="block w-full bg-violet-500 text-white py-2 px-4 rounded-md hover:bg-violet-600"
-          >
-            Submit
-          </button>
+          <label htmlFor="number" className="block text-sm font-medium text-gray-700">
+            Phone Number
+          </label>
+          <input 
+            type="text" 
+            name="phoneNumber"
+            className={`block w-full mt-1 p-2 border rounded-md "border-gray-300"
+              text-gray-900`} />
+            
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+            Message
+          </label>
+          <textarea 
+            name="message" required 
+            className={`block w-full mt-1 p-2 border rounded-md "border-gray-300"
+              text-gray-900`}/>
+          <button type="submit" className="block w-full bg-violet-500 text-white py-2 px-4 rounded-md hover:bg-violet-600">Send Message</button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default ContactUs
+export default ContactUs;
